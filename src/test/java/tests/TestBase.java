@@ -1,6 +1,9 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
+import config.ConfigReader;
+import config.ProjectConfiguration;
+import config.WebConfig;
 import drivers.BrowserstackMobileDriver;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -12,6 +15,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 
 public class TestBase {
+
     @BeforeAll
     public static void setup() {
         Configuration.browser = BrowserstackMobileDriver.class.getName();

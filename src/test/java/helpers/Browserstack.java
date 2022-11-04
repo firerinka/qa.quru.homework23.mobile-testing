@@ -1,5 +1,7 @@
 package helpers;
 
+import config.ProjectConfiguration;
+import config.WebConfig;
 import io.qameta.allure.restassured.AllureRestAssured;
 
 import static io.restassured.RestAssured.given;
@@ -8,12 +10,13 @@ import static java.lang.String.format;
 public class Browserstack {
 
     public static String videoUrl(String sessionId) {
-        String url = format("https://api.browserstack.com/app-automate/sessions/%s.json", sessionId);
+        WebConfig config = ProjectConfiguration.webConfig;
+        String url = format("%s/%s.json", config.browserstackSessionsUrl(), sessionId);
 
         return given()
                 .filter(new AllureRestAssured())
                 .log().all()
-                .auth().basic("marina_TCwhpX", "MQhE4zq8Wf3TmiX76gHb")
+                .auth().basic(config.browserstackUserName(), config.browserstackPassword())
                 .when()
                 .get(url)
                 .then()
