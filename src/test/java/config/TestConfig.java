@@ -6,7 +6,7 @@ import org.aeonbits.owner.Config;
 @Config.Sources({
         "system:properties",
         "classpath:config/${env}.properties",
-        "classpath:config/mobile.${env}.properties",
+        "classpath:config/mobile.${deviceHost}.properties",
         "file:~/${env}.properties",
         "file:./${env}.properties"
 })
