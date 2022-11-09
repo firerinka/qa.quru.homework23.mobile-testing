@@ -7,5 +7,5 @@ gradle clean test -DdeviceHost=emulation
 
 Running tests with Browserstack:
 ```
-gradle clean test -DdeviceHost=emulation
+gradle clean test -DdeviceHost=browserstack
 ```
