@@ -47,7 +47,7 @@ public class LocalMobileDriver implements WebDriverProvider {
 
     private File getApp() {
         String appUrl = config.appUrl();
-        String appPath = "src/test/resources/apps/app-alpha-universal-release.apk";
+        String appPath = LocalMobileDriver.class.getClassLoader().getResource("apps/" + config.appName()).getPath();
 
         File app = new File(appPath);
         if (!app.exists()) {

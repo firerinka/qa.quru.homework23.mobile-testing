@@ -67,15 +67,3 @@ tasks.withType(Test) {
         }
     }
 }
-
-task local(type: Test) {
-    useJUnitPlatform {
-        includeTags 'local'
-    }
-}
-
-task browserstack(type: Test) {
-    useJUnitPlatform {
-        includeTags 'browserstack'
-    }
-}

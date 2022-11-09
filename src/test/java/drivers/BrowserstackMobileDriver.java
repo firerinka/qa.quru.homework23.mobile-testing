@@ -9,14 +9,23 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BrowserstackMobileDriver implements WebDriverProvider {
+    private static TestConfig config = ProjectConfiguration.TEST_CONFIG;
+
+    public static URL getAppiumServerUrl() {
+        try {
+            return new URL(config.mobileServerRemoteUrl());
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @SneakyThrows
     @Override
     public WebDriver createDriver(Capabilities capabilities) {
-        TestConfig config = ProjectConfiguration.TEST_CONFIG;
         MutableCapabilities mutableCapabilities = new MutableCapabilities();
         mutableCapabilities.merge(capabilities);
 
@@ -38,6 +47,6 @@ public class BrowserstackMobileDriver implements WebDriverProvider {
 
         // Initialise the remote Webdriver using BrowserStack remote URL
         // and desired capabilities defined above
-        return new RemoteWebDriver(new URL(config.mobileServerRemoteUrl()), mutableCapabilities);
+        return new RemoteWebDriver(getAppiumServerUrl(), mutableCapabilities);
     }
 }

@@ -55,6 +55,10 @@ public interface TestConfig extends Config {
     @DefaultValue("org.wikipedia.main.MainActivity")
     String appActivity();
 
+    @Key("app.name")
+    @DefaultValue("app-alpha-universal-release.apk")
+    String appName();
+
     @Key("device.deviceName")
     @DefaultValue("Pixel_4_API_30")
     String mobileDeviceName();
@@ -79,6 +83,10 @@ public interface TestConfig extends Config {
     @Key("server.remoteUrl")
     @DefaultValue("http://localhost:4723/wd/hub")
     String mobileServerRemoteUrl();
+
+    @Key("mobileEnvironment")
+    @DefaultValue("EMULATION")
+    MobileEnvironment mobileEnv();
 
     @Key("browserstack.sessionsUrl")
     String browserstackSessionsUrl();
