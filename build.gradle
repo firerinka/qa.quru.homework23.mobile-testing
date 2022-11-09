@@ -16,7 +16,8 @@ def allureVersion = "2.19.0",
     junitVersion = "5.9.0",
     aspectjVersion = "1.9.9.1",
     slf4jVersion = "1.7.32",
-    ownerVersion = "1.0.4"
+    ownerVersion = "1.0.4",
+    commonsIoVersion = "2.11.0"
 
     allure
 {
@@ -44,6 +45,7 @@ dependencies {
             "org.junit.jupiter:junit-jupiter:$junitVersion",
             "org.slf4j:slf4j-simple:$slf4jVersion",
             "org.aspectj:aspectjweaver:$aspectjVersion",
+            "commons-io:commons-io:$commonsIoVersion",
             "org.aeonbits.owner:owner:$ownerVersion"
     )
 }

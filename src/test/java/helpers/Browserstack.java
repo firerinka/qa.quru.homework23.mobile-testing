@@ -1,7 +1,7 @@
 package helpers;
 
 import config.ProjectConfiguration;
-import config.WebConfig;
+import config.TestConfig;
 import io.qameta.allure.restassured.AllureRestAssured;
 
 import static io.restassured.RestAssured.given;
@@ -10,7 +10,7 @@ import static java.lang.String.format;
 public class Browserstack {
 
     public static String videoUrl(String sessionId) {
-        WebConfig config = ProjectConfiguration.webConfig;
+        TestConfig config = ProjectConfiguration.TEST_CONFIG;
         String url = format("%s/%s.json", config.browserstackSessionsUrl(), sessionId);
 
         return given()

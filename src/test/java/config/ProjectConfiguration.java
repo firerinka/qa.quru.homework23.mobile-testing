@@ -5,19 +5,19 @@ import io.restassured.RestAssured;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class ProjectConfiguration {
-    public static final WebConfig webConfig = ConfigReader.Instance.read();
+    public static final TestConfig TEST_CONFIG = ConfigReader.Instance.read();
 
     public static void apiConfig() {
-        RestAssured.baseURI = webConfig.baseUrl();
+        RestAssured.baseURI = TEST_CONFIG.baseUrl();
     }
 
     public static void webConfig() {
-        Configuration.baseUrl = webConfig.baseUrl();
-        Configuration.browser = webConfig.browser().toString();
-        Configuration.browserVersion = webConfig.browserVersion();
-        Configuration.browserSize = webConfig.browserSize();
-        if (webConfig.isRemote()) {
-            Configuration.remote = webConfig.remoteUrl();
+        Configuration.baseUrl = TEST_CONFIG.baseUrl();
+        Configuration.browser = TEST_CONFIG.browser().toString();
+        Configuration.browserVersion = TEST_CONFIG.browserVersion();
+        Configuration.browserSize = TEST_CONFIG.browserSize();
+        if (TEST_CONFIG.isRemote()) {
+            Configuration.remote = TEST_CONFIG.remoteUrl();
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", true);
@@ -26,10 +26,10 @@ public class ProjectConfiguration {
     }
 
     public static String getVideoStorageUrl() {
-        return webConfig.videoStorage();
+        return TEST_CONFIG.videoStorage();
     }
 
     public static Boolean isRemote() {
-        return webConfig.isRemote();
+        return TEST_CONFIG.isRemote();
     }
 }
