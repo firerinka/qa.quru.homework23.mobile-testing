@@ -2,7 +2,7 @@ package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
 import config.ProjectConfiguration;
-import config.WebConfig;
+import config.TestConfig;
 import lombok.SneakyThrows;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
@@ -16,7 +16,7 @@ public class BrowserstackMobileDriver implements WebDriverProvider {
     @SneakyThrows
     @Override
     public WebDriver createDriver(Capabilities capabilities) {
-        WebConfig config = ProjectConfiguration.webConfig;
+        TestConfig config = ProjectConfiguration.TEST_CONFIG;
         MutableCapabilities mutableCapabilities = new MutableCapabilities();
         mutableCapabilities.merge(capabilities);
 
@@ -25,11 +25,11 @@ public class BrowserstackMobileDriver implements WebDriverProvider {
         mutableCapabilities.setCapability("browserstack.key", config.browserstackPassword());
 
         // Set URL of the application under test
-        mutableCapabilities.setCapability("app", config.browserstackAppUrl());
+        mutableCapabilities.setCapability("app", config.appUrl());
 
         // Specify device and os_version for testing
-        mutableCapabilities.setCapability("device", config.browserstackDevice());
-        mutableCapabilities.setCapability("os_version", config.browserstackOsVersion());
+        mutableCapabilities.setCapability("device", config.mobileDeviceName());
+        mutableCapabilities.setCapability("os_version", config.mobileDeviceOsVersion());
 
         // Set other BrowserStack capabilities
         mutableCapabilities.setCapability("project", config.browserstackProject());
@@ -38,6 +38,6 @@ public class BrowserstackMobileDriver implements WebDriverProvider {
 
         // Initialise the remote Webdriver using BrowserStack remote URL
         // and desired capabilities defined above
-        return new RemoteWebDriver(new URL(config.browserstackRemoteUrl()), mutableCapabilities);
+        return new RemoteWebDriver(new URL(config.mobileServerRemoteUrl()), mutableCapabilities);
     }
 }

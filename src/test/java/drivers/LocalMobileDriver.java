@@ -1,6 +1,8 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import config.ProjectConfiguration;
+import config.TestConfig;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.remote.AutomationName;
@@ -16,10 +18,11 @@ import java.net.URL;
 import static org.apache.commons.io.FileUtils.copyInputStreamToFile;
 
 public class LocalMobileDriver implements WebDriverProvider {
+    private static TestConfig config = ProjectConfiguration.TEST_CONFIG;
 
     public static URL getAppiumServerUrl() {
         try {
-            return new URL("http://localhost:4723/wd/hub");
+            return new URL(config.mobileServerRemoteUrl());
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -32,19 +35,18 @@ public class LocalMobileDriver implements WebDriverProvider {
         UiAutomator2Options options = new UiAutomator2Options();
         options.merge(capabilities);
         options.setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2);
-        options.setPlatformName("Android");
-        options.setDeviceName("Pixel_4_API_30");
-        options.setPlatformVersion("11.0");
+        options.setPlatformName(config.mobilePlatformName());
+        options.setDeviceName(config.mobileDeviceName());
+        options.setPlatformVersion(config.mobileDeviceOsVersion());
         options.setApp(app.getAbsolutePath());
-        options.setAppPackage("org.wikipedia.alpha");
-        options.setAppActivity("org.wikipedia.main.MainActivity");
+        options.setAppPackage(config.appPackage());
+        options.setAppActivity(config.appActivity());
 
         return new AndroidDriver(getAppiumServerUrl(), options);
     }
 
     private File getApp() {
-        String appUrl = "https://github.com/wikimedia/apps-android-wikipedia/" +
-                "releases/download/latest/app-alpha-universal-release.apk";
+        String appUrl = config.appUrl();
         String appPath = "src/test/resources/apps/app-alpha-universal-release.apk";
 
         File app = new File(appPath);

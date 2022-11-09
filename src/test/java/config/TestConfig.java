@@ -6,11 +6,11 @@ import org.aeonbits.owner.Config;
 @Config.Sources({
         "system:properties",
         "classpath:config/${env}.properties",
-        "classpath:config/mobile.properties",
+        "classpath:config/mobile.${env}.properties",
         "file:~/${env}.properties",
         "file:./${env}.properties"
 })
-public interface WebConfig extends Config {
+public interface TestConfig extends Config {
     @Key("browser")
     @DefaultValue("CHROME")
     Browser browser();
@@ -44,14 +44,28 @@ public interface WebConfig extends Config {
     @Key("browserstack.password")
     String browserstackPassword();
 
-    @Key("browserstack.appUrl")
-    String browserstackAppUrl();
+    @Key("app.appUrl")
+    String appUrl();
 
-    @Key("browserstack.device")
-    String browserstackDevice();
+    @Key("app.package")
+    @DefaultValue("org.wikipedia.alpha")
+    String appPackage();
 
-    @Key("browserstack.os_version")
-    String browserstackOsVersion();
+    @Key("app.activity")
+    @DefaultValue("org.wikipedia.main.MainActivity")
+    String appActivity();
+
+    @Key("device.deviceName")
+    @DefaultValue("Pixel_4_API_30")
+    String mobileDeviceName();
+
+    @Key("device.os_version")
+    @DefaultValue("11.0")
+    String mobileDeviceOsVersion();
+
+    @Key("device.platformName")
+    @DefaultValue("Android")
+    String mobilePlatformName();
 
     @Key("browserstack.project")
     String browserstackProject();
@@ -62,8 +76,9 @@ public interface WebConfig extends Config {
     @Key("browserstack.testsName")
     String browserstackTestsName();
 
-    @Key("browserstack.remoteUrl")
-    String browserstackRemoteUrl();
+    @Key("server.remoteUrl")
+    @DefaultValue("http://localhost:4723/wd/hub")
+    String mobileServerRemoteUrl();
 
     @Key("browserstack.sessionsUrl")
     String browserstackSessionsUrl();

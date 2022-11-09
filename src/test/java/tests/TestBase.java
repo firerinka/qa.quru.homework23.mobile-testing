@@ -1,9 +1,6 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import config.ConfigReader;
-import config.ProjectConfiguration;
-import config.WebConfig;
 import drivers.BrowserstackMobileDriver;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;

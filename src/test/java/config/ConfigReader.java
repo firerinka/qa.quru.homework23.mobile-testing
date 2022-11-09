@@ -5,13 +5,13 @@ import org.aeonbits.owner.ConfigFactory;
 public enum ConfigReader {
     Instance;
 
-    private static final WebConfig webConfig =
+    private static final TestConfig TEST_CONFIG =
             ConfigFactory.create(
-                    WebConfig.class,
+                    TestConfig.class,
                     System.getProperties()
             );
 
-    public WebConfig read() {
-        return webConfig;
+    public TestConfig read() {
+        return TEST_CONFIG;
     }
 }
